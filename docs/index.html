@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Index</title>
+    <link rel="stylesheet" href="https://unpkg.com/normalize.css">
+    <link rel="stylesheet" href="https://unpkg.com/cocktailcss">
+    <link rel="stylesheet" href="style/app.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <header class="header">
+            <div class="flex justify-between items-center"><a class="padding-x-4 padding-y-3" href="/">🍸 Cocktail</a>
+                <nav>
+                    <ul class="flex margin-y-0 padding-left-0 no-list">
+                        <li><a class="block padding-x-4 padding-y-3" href="/">Docs</a></li>
+                        <li><a class="block padding-x-4 padding-y-3" href="/examples.html">Examples</a></li>
+                        <li><a class="block padding-x-4 padding-y-3" href="https://github.com/cocktailcss/cocktail">GitHub</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <main>
+            <div class="padding-y-4" id="navigation" v-cloak>
+                <div v-if="dataLoaded">
+                    <div class="padding-x-4"><input class="cocktail-input" :value="input" @input="updateInput" ref="filter" type="text" placeholder="Filter with keywords separated by space like: grid row gap, spacing margin top, line height, etc.">
+                        <div class="text-tight font-xs"><small v-if="noResults">No matches</small><small v-else>{{ numberOfClasses }} classes matched</small></div>
+                    </div>
+                    <div class="padding-top-4">
+                        <div class="grid grid-gap-3 padding-x-4 padding-y-1 bg-lightgray">
+                            <div class="grid-column-3">Class</div>
+                            <div class="grid-column-4">CSS</div>
+                            <div class="grid-column-2">Mobile First</div>
+                            <div class="grid-column-3">Keywords</div>
+                        </div>
+                        <div class="grid grid-gap-3 padding-x-4 padding-y-1" v-for="(cocktailClass, idx) in filteredClasses" :key="cocktailClass.className" :class="{ &quot;bg-lightgray&quot;: even(idx) }">
+                            <div class="grid-column-3 font-mono">{{ cocktailClass.className }}</div>
+                            <div class="grid-column-4 font-mono">
+                                <div v-for="(style, idx) in cocktailClass.css" :key="idx">{{ style }}</div>
+                            </div>
+                            <div class="grid-column-2"><span v-if="cocktailClass.mobileFirstSupport">Yes</span><span v-else>No</span></div>
+                            <div class="grid-column-3">
+                                <div class="flex flex-wrap items-center"><button class="cocktail-keyword margin-right-2" @click="setKeyword(keyword)" v-for="(keyword, idx) in cocktailClass.keywords" :key="idx" type="button">{{ keyword }}</button></div>
+                            </div>
+                        </div>
+                        <div class="padding-x-4 padding-y-3" v-if="noResults">Nothing to do here :(</div>
+                    </div>
+                </div>
+                <div class="padding-x-4" v-else>Loading...</div>
+            </div>
+        </main>
+        <footer>
+            <div class="padding-x-4 padding-y-3 font-xs">© 2018 Released under the <a href="https://opensource.org/licenses/MIT" target="_blank">MIT License</a></div>
+        </footer>
+    </div>
+    <script src="script/app.js"></script>
+</body>
+
+</html>

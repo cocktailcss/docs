@@ -1,0 +1,79 @@
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+  @include respondTo(desktop, min) {
+    font-size: 20px;
+  }
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  font-size: 1rem;
+  font-family: $font_default;
+  line-height: 1.7;
+  color: $color_default;
+  background-color: #fff;
+}
+
+a {
+  color: $color_primary;
+  text-decoration: none;
+  &:hover,
+  &:focus {
+    color: lighten($color_primary, 10%);
+  }
+}
+
+button {
+  cursor: pointer;
+}
+
+button,
+a {
+  &,
+  &:hover,
+  &:focus,
+  &:active {
+    outline: none;
+  }
+}
+
+img {
+  max-width: 100%;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+textarea {
+  resize: vertical;
+}
+
+input[type='text'],
+input[type='email'],
+input[type='tel'],
+input[type='password'],
+input[type='search'],
+textarea {
+  &::-webkit-input-placeholder {
+    /* Chrome/Opera/Safari */
+    color: lighten(gray, 20%);
+  }
+  &::-moz-placeholder {
+    /* Firefox 19+ */
+    color: lighten(gray, 20%);
+  }
+  &:-ms-input-placeholder {
+    /* IE 10+ */
+    color: lighten(gray, 20%);
+  }
+  &:-moz-placeholder {
+    /* Firefox 18- */
+    color: lighten(gray, 20%);
+  }
+}

@@ -1,0 +1,67 @@
+@mixin respondTo($media, $width) {
+  @if $media == smartphone {
+    @if $width == min {
+      @media screen and (min-width: $mq_smartphone) {
+        @content;
+      }
+    } @else if $width == max {
+      @media screen and (max-width: $mq_smartphone) {
+        @content;
+      }
+    }
+  }
+
+  @if $media == tablet {
+    @if $width == min {
+      @media screen and (min-width: $mq_tablet) {
+        @content;
+      }
+    } @else if $width == max {
+      @media screen and (max-width: $mq_tablet) {
+        @content;
+      }
+    }
+  }
+
+  @if $media == netbook {
+    @if $width == min {
+      @media screen and (min-width: $mq_netbook) {
+        @content;
+      }
+    } @else if $width == max {
+      @media screen and (max-width: $mq_netbook) {
+        @content;
+      }
+    }
+  }
+
+  @if $media == notebook {
+    @if $width == min {
+      @media screen and (min-width: $mq_notebook) {
+        @content;
+      }
+    } @else if $width == max {
+      @media screen and (max-width: $mq_notebook) {
+        @content;
+      }
+    }
+  }
+
+  @if $media == desktop {
+    @if $width == min {
+      @media screen and (min-width: $mq_desktop) {
+        @content;
+      }
+    } @else if $width == max {
+      @media screen and (max-width: $mq_desktop) {
+        @content;
+      }
+    }
+  }
+}
+
+@mixin mod($mod) {
+  @at-root #{&}#{&}_#{$mod} {
+    @content;
+  }
+}
