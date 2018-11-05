@@ -9,3 +9,41 @@
 .bg-lightgray {
   background-color: lighten(black, 98%);
 }
+
+.bg-black-5 {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.bg-primary-gradient {
+  background: linear-gradient(135deg, #fc8060 0, #fc7060 100%);
+}
+
+.bg-primary-lite {
+  background-color: #fcede3;
+}
+
+.color-primary-dark {
+  color: #a56236;
+}
+
+.color-silver {
+  color: silver;
+}
+
+.dim {
+  transition: background-color 0.1s ease;
+  &:hover,
+  &:focus {
+    @include respondTo(netbook, min) {
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+  }
+}
+
+.link-white {
+  &,
+  &:hover,
+  &:focus {
+    color: white;
+  }
+}

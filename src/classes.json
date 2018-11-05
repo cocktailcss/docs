@@ -602,7 +602,7 @@
   {
     "className": "toggle-trigger",
     "css": [
-      "toggle-trigger:checked ~ .toggle-content {",
+      ".toggle-trigger:checked ~ .toggle-content {",
       "\tdisplay: block;",
       "}"
     ],

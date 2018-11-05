@@ -4,7 +4,7 @@ import debounce from 'lodash.debounce';
 const classesListUpdateDebounce = 50;
 
 new Vue({
-  el: '#navigation',
+  el: '#cocktail',
   data: {
     dataLoaded: false,
     input: '',
@@ -12,14 +12,14 @@ new Vue({
     filteredClasses: null,
   },
   computed: {
-    numberOfClasses() {
+    numberOfFilteredClasses() {
       return this.filteredClasses.length;
     },
-    inputIsEmpty() {
-      return this.input === '';
+    inputIsNotEmpty() {
+      return this.input !== '';
     },
     noResults() {
-      return this.numberOfClasses === 0;
+      return this.numberOfFilteredClasses === 0;
     },
     query() {
       const normalizedInput = this.input.trim().replace(/ +(?= )/g, '');
@@ -27,23 +27,26 @@ new Vue({
     },
   },
   methods: {
+    reset() {
+      this.input = '';
+      this.$refs.filter.focus();
+    },
     filterClassesWithDebounce: debounce(function() {
       this.filterClasses();
     }, classesListUpdateDebounce),
     filterClasses() {
-      this.filteredClasses = this.classes.filter(functionalClass => {
-        return this.query.every(query => {
-          return functionalClass.keywords.some(keyword => {
-            return keyword.includes(query);
-          });
-        });
-      });
+      this.filteredClasses = this.classes.filter(functionalClass =>
+        this.query.every(query =>
+          functionalClass.keywords.some(keyword => keyword.includes(query)),
+        ),
+      );
     },
     updateInput(e) {
       this.input = e.target.value;
     },
     setKeyword(keyword) {
       this.input = keyword;
+      this.$refs.filter.focus();
     },
     even: n => n % 2,
   },

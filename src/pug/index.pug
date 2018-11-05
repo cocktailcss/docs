@@ -10,45 +10,63 @@ block content
 		.wrapper
 			+header
 			main
-				.padding-y-4#navigation(v-cloak)
-					div(v-if="dataLoaded")
-						.padding-x-4
-							input(
-								:value='input'
-								@input='updateInput'
-								ref='filter'
-								type='text'
-								placeholder='Filter with keywords separated by space like: grid row gap, spacing margin top, line height, etc.'
-							).cocktail-input
-							.text-tight.font-xs
-								small(v-if='noResults') No matches
-								small(v-else) {{ numberOfClasses }} classes matched
-						.padding-top-4
-							.grid.grid-gap-3.padding-x-4.padding-y-1.bg-lightgray
+				#cocktail(v-cloak)
+					.padding-bottom-4(v-if="dataLoaded")
+						.cocktail-header.bg-white
+							.padding-x-3.padding-x-4--md.padding-y-4.relative
+								.relative
+									input(
+										:value='input'
+										@input='updateInput'
+										ref='filter'
+										type='text'
+										placeholder='Filter with keywords separated by space like: grid row gap, spacing margin top, line height, etc.'
+									).cocktail-input
+								.flex.font-xs
+									span(v-if='noResults') No matches
+									span(v-else) {{ numberOfFilteredClasses }} classes matched
+									span(v-if='inputIsNotEmpty')
+										span.margin-x-2 ·
+										button(type='button' @click='reset').cocktail-trigger Reset
+							.hidden.grid--md.grid-column-gap-3.padding-x-4.padding-y-2.bg-primary-lite.color-primary-dark
 								.grid-column-3 Class
 								.grid-column-4 CSS
-								.grid-column-2 Mobile First
+								.flex.items-start.grid-column-2
+									span Mobile First
+									small.margin-left-1.cursor-help(title='Use suffixes to enable class: --sm, --md, --lg, --xl, --xxl') 🛈
 								.grid-column-3 Keywords
-							.grid.grid-gap-3.padding-x-4.padding-y-1(
-								v-for='(cocktailClass, idx) in filteredClasses' 
-								:key='cocktailClass.className'
-								:class='{ "bg-lightgray": even(idx) }'
-							)
-								.grid-column-3.font-mono {{ cocktailClass.className }}
-								.grid-column-4.font-mono
-									div(v-for="(style, idx) in cocktailClass.css" :key="idx") {{ style }}
-								.grid-column-2
-									span(v-if='cocktailClass.mobileFirstSupport') Yes
-									span(v-else) No
-								.grid-column-3
-									.flex.flex-wrap.items-center
-										button(
-											@click="setKeyword(keyword)"
-											v-for="(keyword, idx) in cocktailClass.keywords"
-											:key="idx"
-											type="button"
-										).cocktail-keyword.margin-right-2 {{ keyword }}
-							.padding-x-4.padding-y-3(v-if='noResults') Nothing to do here :(
-					.padding-x-4(v-else) Loading...
+						.grid--md.grid-column-gap-3.padding-x-3.padding-x-4--md.padding-y-3.padding-y-2--md(
+							v-for='(cocktailClass, idx) in filteredClasses' 
+							:key='cocktailClass.className'
+							:class='{ "bg-lightgray": even(idx) }'
+						)
+							.grid-column-3
+								.grid.grid-column-gap-2.block--md.padding-y-1.padding-y-0--md
+									.hidden--md.grid-column-4.color-primary-dark Class
+									.grid-column-8.font-mono {{ cocktailClass.className }}
+							.grid-column-4
+								.grid.grid-column-gap-2.block--md.padding-y-1.padding-y-0--md
+									.hidden--md.grid-column-4.color-primary-dark CSS
+									.grid-column-8.font-mono
+										div(v-for="(style, idx) in cocktailClass.css" :key="idx") {{ style }}
+							.grid-column-2
+								.grid.grid-column-gap-2.block--md.padding-y-1.padding-y-0--md
+									.hidden--md.grid-column-4.color-primary-dark Mobile First
+									.grid-column-8
+										span(v-if='cocktailClass.mobileFirstSupport') Yes
+										span(v-else) No
+							.grid-column-3
+								.grid.grid-column-gap-2.block--md.padding-y-1.padding-y-0--md
+									.hidden--md.grid-column-4.color-primary-dark Keywords
+									.grid-column-8
+										.flex.flex-wrap.items-center
+											button(
+												@click="setKeyword(keyword)"
+												v-for="(keyword, idx) in cocktailClass.keywords"
+												:key="idx"
+												type="button"
+											).cocktail-trigger.margin-right-2 {{ keyword }}
+						.padding-x-4.padding-y-3.font-xs(v-if='noResults') Nothing's found, but take the beer 🍺 <button class="cocktail-trigger" @click='reset'>Drink</button>
+					.padding-x-3.padding-x-4--md.padding-y-4(v-else) Loading...
 			+footer
 		+script
