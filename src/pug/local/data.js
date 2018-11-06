@@ -2,7 +2,7 @@ module.exports = {
   menus: [
     {
       title: 'Docs',
-      href: '/',
+      href: 'index.html',
       target: false,
     },
     {
