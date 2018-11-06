@@ -1,7 +1,7 @@
 {
   "name": "docs",
-  "version": "1.0.0",
-  "description": "Docs for 🍸 Cocktail functional CSS",
+  "version": "1.0.1",
+  "description": "Docs for Cocktail functional CSS",
   "repository": "cocktailcss/cocktail",
   "keywords": [
     "cocktail",
