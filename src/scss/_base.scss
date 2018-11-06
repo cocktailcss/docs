@@ -26,21 +26,16 @@ a {
   text-decoration: none;
   &:hover,
   &:focus {
+    @extend %no-outline;
     color: lighten($color_primary, 10%);
   }
 }
 
 button {
   cursor: pointer;
-}
-
-button,
-a {
-  &,
   &:hover,
-  &:focus,
-  &:active {
-    outline: none;
+  &:focus {
+    @extend %no-outline;
   }
 }
 

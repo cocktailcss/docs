@@ -23,3 +23,15 @@
     transform: translate3d(0, -4px, 0);
   }
 }
+
+@keyframes pulse {
+  from {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.5;
+  }
+}

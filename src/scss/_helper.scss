@@ -47,3 +47,19 @@
     color: white;
   }
 }
+
+.animate-pulse {
+  animation-name: pulse;
+  animation-duration: 1s;
+  animation-timing-function: ease;
+  animation-iteration-count: infinite;
+  animation-fill-mode: both;
+}
+
+$animationDelay: 100;
+@while $animationDelay <= 400 {
+  .animation-delay-#{$animationDelay} {
+    animation-delay: #{$animationDelay}ms;
+  }
+  $animationDelay: $animationDelay + 100;
+}

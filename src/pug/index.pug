@@ -12,7 +12,7 @@ block content
 			main
 				#cocktail(v-cloak)
 					.padding-bottom-4(v-if="dataLoaded")
-						.cocktail-header.bg-white
+						.cocktail-header.bg-white.z-index-1
 							.padding-x-3.padding-x-4--md.padding-y-4.relative
 								.relative
 									input(
@@ -67,6 +67,53 @@ block content
 												type="button"
 											).cocktail-trigger.margin-right-2 {{ keyword }}
 						.padding-x-4.padding-y-3.font-xs(v-if='noResults') Nothing's found, but take the beer 🍺 <button class="cocktail-trigger" @click='reset'>Drink</button>
-					.padding-x-3.padding-x-4--md.padding-y-4(v-else) Loading...
+					.padding-bottom-4(v-else)
+						.cocktail-header.bg-white.z-index-1
+							.padding-x-3.padding-x-4--md.padding-y-4.relative.animate-pulse
+								.cocktail-placeholder Input placeholder
+								.flex.font-xs
+									.cocktail-placeholder.margin-top-1 000 classes matched
+							.hidden.grid--md.grid-column-gap-3.padding-x-4.padding-y-2.bg-primary-lite.color-primary-dark.animate-pulse.animation-delay-100
+								.flex.grid-column-3
+									.cocktail-placeholder Class
+								.flex.grid-column-4
+									.cocktail-placeholder CSS
+								.flex.items-start.grid-column-2
+									.cocktail-placeholder Mobile First
+								.flex.grid-column-3
+									.cocktail-placeholder Keywords
+						- for(let i = 0; i < 20; i++)
+							-
+								const bgClass = i % 2 ? 'bg-lightgray' : ''
+								const delay = _.sample([100, 200, 300, 400])
+								const animationDelayClass = `animation-delay-${delay}`
+							div(class=`grid--md grid-column-gap-3 padding-x-3 padding-x-4--md padding-y-3 padding-y-2--md ${bgClass} animate-pulse ${animationDelayClass}`)
+								.grid-column-3
+									.grid.grid-column-gap-2.block--md.padding-y-1.padding-y-0--md
+										.flex.hidden--md.grid-column-4.color-primary-dark
+											.cocktail-placeholder Class
+										.flex.grid-column-8.font-mono
+											.cocktail-placeholder inline
+											.cocktail-placeholder block
+								.grid-column-4
+									.grid.grid-column-gap-2.block--md.padding-y-1.padding-y-0--md
+										.flex.hidden--md.grid-column-4.color-primary-dark
+											.cocktail-placeholder CSS
+										.flex.grid-column-8.font-mono
+											.cocktail-placeholder display: block
+								.grid-column-2
+									.grid.grid-column-gap-2.block--md.padding-y-1.padding-y-0--md
+										.flex.hidden--md.grid-column-4.color-primary-dark
+											.cocktail-placeholder Mobile First
+										.flex.grid-column-8
+											.cocktail-placeholder Yes
+								.grid-column-3
+									.grid.grid-column-gap-2.block--md.padding-y-1.padding-y-0--md
+										.flex.hidden--md.grid-column-4.color-primary-dark
+											.cocktail-placeholder Keywords
+										.grid-column-8
+											.flex.flex-wrap.items-center
+												- for(let j = 0; j < 3; j++)
+													.cocktail-placeholder.margin-right-2 keyword
 			+footer
 		+script

@@ -2,7 +2,8 @@
   display: block;
   position: relative;
   width: 100%;
-  height: 2rem;
+  padding-top: 0.4rem;
+  padding-bottom: 0.4rem;
   border: none;
   border-bottom: 0.125rem solid lighten(black, 80%);
   border-radius: 0.125rem;
@@ -18,6 +19,12 @@
   }
 }
 
+.cocktail-placeholder {
+  background-color: #f9e5e0;
+  user-select: none;
+  color: rgba(0, 0, 0, 0);
+}
+
 .cocktail-trigger {
   padding: 0;
   border: none;
@@ -30,6 +37,11 @@
   &:focus {
     @include respondTo(netbook, min) {
       color: $color_primary;
+    }
+  }
+  &:active {
+    @include respondTo(netbook, min) {
+      transform: translateY(1px);
     }
   }
 }

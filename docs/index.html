@@ -27,7 +27,7 @@
         <main>
             <div id="cocktail" v-cloak>
                 <div class="padding-bottom-4" v-if="dataLoaded">
-                    <div class="cocktail-header bg-white">
+                    <div class="cocktail-header bg-white z-index-1">
                         <div class="padding-x-3 padding-x-4--md padding-y-4 relative">
                             <div class="relative"><input class="cocktail-input" :value="input" @input="updateInput" ref="filter" type="text" placeholder="Filter with keywords separated by space like: grid row gap, spacing margin top, line height, etc."></div>
                             <div class="flex font-xs"><span v-if="noResults">No matches</span><span v-else>{{ numberOfFilteredClasses }} classes matched</span><span v-if="inputIsNotEmpty"><span class="margin-x-2">·</span><button class="cocktail-trigger" type="button" @click="reset">Reset</button></span></div>
@@ -71,7 +71,970 @@
                     </div>
                     <div class="padding-x-4 padding-y-3 font-xs" v-if="noResults">Nothing's found, but take the beer 🍺 <button class="cocktail-trigger" @click='reset'>Drink</button></div>
                 </div>
-                <div class="padding-x-3 padding-x-4--md padding-y-4" v-else>Loading...</div>
+                <div class="padding-bottom-4" v-else>
+                    <div class="cocktail-header bg-white z-index-1">
+                        <div class="padding-x-3 padding-x-4--md padding-y-4 relative animate-pulse">
+                            <div class="cocktail-placeholder">Input placeholder</div>
+                            <div class="flex font-xs">
+                                <div class="cocktail-placeholder margin-top-1">000 classes matched</div>
+                            </div>
+                        </div>
+                        <div class="hidden grid--md grid-column-gap-3 padding-x-4 padding-y-2 bg-primary-lite color-primary-dark animate-pulse animation-delay-100">
+                            <div class="flex grid-column-3">
+                                <div class="cocktail-placeholder">Class</div>
+                            </div>
+                            <div class="flex grid-column-4">
+                                <div class="cocktail-placeholder">CSS</div>
+                            </div>
+                            <div class="flex items-start grid-column-2">
+                                <div class="cocktail-placeholder">Mobile First</div>
+                            </div>
+                            <div class="flex grid-column-3">
+                                <div class="cocktail-placeholder">Keywords</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid--md grid-column-gap-3 padding-x-3 padding-x-4--md padding-y-3 padding-y-2--md  animate-pulse animation-delay-400">
+                        <div class="grid-column-3">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">Class</div>
+                                </div>
+                                <div class="flex grid-column-8 font-mono">
+                                    <div class="cocktail-placeholder">inline</div>
+                                    <div class="cocktail-placeholder">block</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column-4">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">CSS</div>
+                                </div>
+                                <div class="flex grid-column-8 font-mono">
+                                    <div class="cocktail-placeholder">display: block</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column-2">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">Mobile First</div>
+                                </div>
+                                <div class="flex grid-column-8">
+                                    <div class="cocktail-placeholder">Yes</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column-3">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">Keywords</div>
+                                </div>
+                                <div class="grid-column-8">
+                                    <div class="flex flex-wrap items-center">
+                                        <div class="cocktail-placeholder margin-right-2">keyword</div>
+                                        <div class="cocktail-placeholder margin-right-2">keyword</div>
+                                        <div class="cocktail-placeholder margin-right-2">keyword</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid--md grid-column-gap-3 padding-x-3 padding-x-4--md padding-y-3 padding-y-2--md bg-lightgray animate-pulse animation-delay-300">
+                        <div class="grid-column-3">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">Class</div>
+                                </div>
+                                <div class="flex grid-column-8 font-mono">
+                                    <div class="cocktail-placeholder">inline</div>
+                                    <div class="cocktail-placeholder">block</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column-4">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">CSS</div>
+                                </div>
+                                <div class="flex grid-column-8 font-mono">
+                                    <div class="cocktail-placeholder">display: block</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column-2">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">Mobile First</div>
+                                </div>
+                                <div class="flex grid-column-8">
+                                    <div class="cocktail-placeholder">Yes</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column-3">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">Keywords</div>
+                                </div>
+                                <div class="grid-column-8">
+                                    <div class="flex flex-wrap items-center">
+                                        <div class="cocktail-placeholder margin-right-2">keyword</div>
+                                        <div class="cocktail-placeholder margin-right-2">keyword</div>
+                                        <div class="cocktail-placeholder margin-right-2">keyword</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid--md grid-column-gap-3 padding-x-3 padding-x-4--md padding-y-3 padding-y-2--md  animate-pulse animation-delay-200">
+                        <div class="grid-column-3">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">Class</div>
+                                </div>
+                                <div class="flex grid-column-8 font-mono">
+                                    <div class="cocktail-placeholder">inline</div>
+                                    <div class="cocktail-placeholder">block</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column-4">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">CSS</div>
+                                </div>
+                                <div class="flex grid-column-8 font-mono">
+                                    <div class="cocktail-placeholder">display: block</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column-2">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">Mobile First</div>
+                                </div>
+                                <div class="flex grid-column-8">
+                                    <div class="cocktail-placeholder">Yes</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column-3">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">Keywords</div>
+                                </div>
+                                <div class="grid-column-8">
+                                    <div class="flex flex-wrap items-center">
+                                        <div class="cocktail-placeholder margin-right-2">keyword</div>
+                                        <div class="cocktail-placeholder margin-right-2">keyword</div>
+                                        <div class="cocktail-placeholder margin-right-2">keyword</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid--md grid-column-gap-3 padding-x-3 padding-x-4--md padding-y-3 padding-y-2--md bg-lightgray animate-pulse animation-delay-300">
+                        <div class="grid-column-3">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">Class</div>
+                                </div>
+                                <div class="flex grid-column-8 font-mono">
+                                    <div class="cocktail-placeholder">inline</div>
+                                    <div class="cocktail-placeholder">block</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column-4">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">CSS</div>
+                                </div>
+                                <div class="flex grid-column-8 font-mono">
+                                    <div class="cocktail-placeholder">display: block</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column-2">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">Mobile First</div>
+                                </div>
+                                <div class="flex grid-column-8">
+                                    <div class="cocktail-placeholder">Yes</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column-3">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">Keywords</div>
+                                </div>
+                                <div class="grid-column-8">
+                                    <div class="flex flex-wrap items-center">
+                                        <div class="cocktail-placeholder margin-right-2">keyword</div>
+                                        <div class="cocktail-placeholder margin-right-2">keyword</div>
+                                        <div class="cocktail-placeholder margin-right-2">keyword</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid--md grid-column-gap-3 padding-x-3 padding-x-4--md padding-y-3 padding-y-2--md  animate-pulse animation-delay-200">
+                        <div class="grid-column-3">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">Class</div>
+                                </div>
+                                <div class="flex grid-column-8 font-mono">
+                                    <div class="cocktail-placeholder">inline</div>
+                                    <div class="cocktail-placeholder">block</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column-4">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">CSS</div>
+                                </div>
+                                <div class="flex grid-column-8 font-mono">
+                                    <div class="cocktail-placeholder">display: block</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column-2">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">Mobile First</div>
+                                </div>
+                                <div class="flex grid-column-8">
+                                    <div class="cocktail-placeholder">Yes</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column-3">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">Keywords</div>
+                                </div>
+                                <div class="grid-column-8">
+                                    <div class="flex flex-wrap items-center">
+                                        <div class="cocktail-placeholder margin-right-2">keyword</div>
+                                        <div class="cocktail-placeholder margin-right-2">keyword</div>
+                                        <div class="cocktail-placeholder margin-right-2">keyword</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid--md grid-column-gap-3 padding-x-3 padding-x-4--md padding-y-3 padding-y-2--md bg-lightgray animate-pulse animation-delay-400">
+                        <div class="grid-column-3">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">Class</div>
+                                </div>
+                                <div class="flex grid-column-8 font-mono">
+                                    <div class="cocktail-placeholder">inline</div>
+                                    <div class="cocktail-placeholder">block</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column-4">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">CSS</div>
+                                </div>
+                                <div class="flex grid-column-8 font-mono">
+                                    <div class="cocktail-placeholder">display: block</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column-2">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">Mobile First</div>
+                                </div>
+                                <div class="flex grid-column-8">
+                                    <div class="cocktail-placeholder">Yes</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column-3">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">Keywords</div>
+                                </div>
+                                <div class="grid-column-8">
+                                    <div class="flex flex-wrap items-center">
+                                        <div class="cocktail-placeholder margin-right-2">keyword</div>
+                                        <div class="cocktail-placeholder margin-right-2">keyword</div>
+                                        <div class="cocktail-placeholder margin-right-2">keyword</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid--md grid-column-gap-3 padding-x-3 padding-x-4--md padding-y-3 padding-y-2--md  animate-pulse animation-delay-200">
+                        <div class="grid-column-3">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">Class</div>
+                                </div>
+                                <div class="flex grid-column-8 font-mono">
+                                    <div class="cocktail-placeholder">inline</div>
+                                    <div class="cocktail-placeholder">block</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column-4">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">CSS</div>
+                                </div>
+                                <div class="flex grid-column-8 font-mono">
+                                    <div class="cocktail-placeholder">display: block</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column-2">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">Mobile First</div>
+                                </div>
+                                <div class="flex grid-column-8">
+                                    <div class="cocktail-placeholder">Yes</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column-3">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">Keywords</div>
+                                </div>
+                                <div class="grid-column-8">
+                                    <div class="flex flex-wrap items-center">
+                                        <div class="cocktail-placeholder margin-right-2">keyword</div>
+                                        <div class="cocktail-placeholder margin-right-2">keyword</div>
+                                        <div class="cocktail-placeholder margin-right-2">keyword</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid--md grid-column-gap-3 padding-x-3 padding-x-4--md padding-y-3 padding-y-2--md bg-lightgray animate-pulse animation-delay-200">
+                        <div class="grid-column-3">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">Class</div>
+                                </div>
+                                <div class="flex grid-column-8 font-mono">
+                                    <div class="cocktail-placeholder">inline</div>
+                                    <div class="cocktail-placeholder">block</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column-4">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">CSS</div>
+                                </div>
+                                <div class="flex grid-column-8 font-mono">
+                                    <div class="cocktail-placeholder">display: block</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column-2">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">Mobile First</div>
+                                </div>
+                                <div class="flex grid-column-8">
+                                    <div class="cocktail-placeholder">Yes</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column-3">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">Keywords</div>
+                                </div>
+                                <div class="grid-column-8">
+                                    <div class="flex flex-wrap items-center">
+                                        <div class="cocktail-placeholder margin-right-2">keyword</div>
+                                        <div class="cocktail-placeholder margin-right-2">keyword</div>
+                                        <div class="cocktail-placeholder margin-right-2">keyword</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid--md grid-column-gap-3 padding-x-3 padding-x-4--md padding-y-3 padding-y-2--md  animate-pulse animation-delay-400">
+                        <div class="grid-column-3">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">Class</div>
+                                </div>
+                                <div class="flex grid-column-8 font-mono">
+                                    <div class="cocktail-placeholder">inline</div>
+                                    <div class="cocktail-placeholder">block</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column-4">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">CSS</div>
+                                </div>
+                                <div class="flex grid-column-8 font-mono">
+                                    <div class="cocktail-placeholder">display: block</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column-2">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">Mobile First</div>
+                                </div>
+                                <div class="flex grid-column-8">
+                                    <div class="cocktail-placeholder">Yes</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column-3">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">Keywords</div>
+                                </div>
+                                <div class="grid-column-8">
+                                    <div class="flex flex-wrap items-center">
+                                        <div class="cocktail-placeholder margin-right-2">keyword</div>
+                                        <div class="cocktail-placeholder margin-right-2">keyword</div>
+                                        <div class="cocktail-placeholder margin-right-2">keyword</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid--md grid-column-gap-3 padding-x-3 padding-x-4--md padding-y-3 padding-y-2--md bg-lightgray animate-pulse animation-delay-200">
+                        <div class="grid-column-3">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">Class</div>
+                                </div>
+                                <div class="flex grid-column-8 font-mono">
+                                    <div class="cocktail-placeholder">inline</div>
+                                    <div class="cocktail-placeholder">block</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column-4">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">CSS</div>
+                                </div>
+                                <div class="flex grid-column-8 font-mono">
+                                    <div class="cocktail-placeholder">display: block</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column-2">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">Mobile First</div>
+                                </div>
+                                <div class="flex grid-column-8">
+                                    <div class="cocktail-placeholder">Yes</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column-3">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">Keywords</div>
+                                </div>
+                                <div class="grid-column-8">
+                                    <div class="flex flex-wrap items-center">
+                                        <div class="cocktail-placeholder margin-right-2">keyword</div>
+                                        <div class="cocktail-placeholder margin-right-2">keyword</div>
+                                        <div class="cocktail-placeholder margin-right-2">keyword</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid--md grid-column-gap-3 padding-x-3 padding-x-4--md padding-y-3 padding-y-2--md  animate-pulse animation-delay-200">
+                        <div class="grid-column-3">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">Class</div>
+                                </div>
+                                <div class="flex grid-column-8 font-mono">
+                                    <div class="cocktail-placeholder">inline</div>
+                                    <div class="cocktail-placeholder">block</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column-4">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">CSS</div>
+                                </div>
+                                <div class="flex grid-column-8 font-mono">
+                                    <div class="cocktail-placeholder">display: block</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column-2">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">Mobile First</div>
+                                </div>
+                                <div class="flex grid-column-8">
+                                    <div class="cocktail-placeholder">Yes</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column-3">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">Keywords</div>
+                                </div>
+                                <div class="grid-column-8">
+                                    <div class="flex flex-wrap items-center">
+                                        <div class="cocktail-placeholder margin-right-2">keyword</div>
+                                        <div class="cocktail-placeholder margin-right-2">keyword</div>
+                                        <div class="cocktail-placeholder margin-right-2">keyword</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid--md grid-column-gap-3 padding-x-3 padding-x-4--md padding-y-3 padding-y-2--md bg-lightgray animate-pulse animation-delay-300">
+                        <div class="grid-column-3">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">Class</div>
+                                </div>
+                                <div class="flex grid-column-8 font-mono">
+                                    <div class="cocktail-placeholder">inline</div>
+                                    <div class="cocktail-placeholder">block</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column-4">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">CSS</div>
+                                </div>
+                                <div class="flex grid-column-8 font-mono">
+                                    <div class="cocktail-placeholder">display: block</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column-2">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">Mobile First</div>
+                                </div>
+                                <div class="flex grid-column-8">
+                                    <div class="cocktail-placeholder">Yes</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column-3">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">Keywords</div>
+                                </div>
+                                <div class="grid-column-8">
+                                    <div class="flex flex-wrap items-center">
+                                        <div class="cocktail-placeholder margin-right-2">keyword</div>
+                                        <div class="cocktail-placeholder margin-right-2">keyword</div>
+                                        <div class="cocktail-placeholder margin-right-2">keyword</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid--md grid-column-gap-3 padding-x-3 padding-x-4--md padding-y-3 padding-y-2--md  animate-pulse animation-delay-400">
+                        <div class="grid-column-3">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">Class</div>
+                                </div>
+                                <div class="flex grid-column-8 font-mono">
+                                    <div class="cocktail-placeholder">inline</div>
+                                    <div class="cocktail-placeholder">block</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column-4">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">CSS</div>
+                                </div>
+                                <div class="flex grid-column-8 font-mono">
+                                    <div class="cocktail-placeholder">display: block</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column-2">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">Mobile First</div>
+                                </div>
+                                <div class="flex grid-column-8">
+                                    <div class="cocktail-placeholder">Yes</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column-3">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">Keywords</div>
+                                </div>
+                                <div class="grid-column-8">
+                                    <div class="flex flex-wrap items-center">
+                                        <div class="cocktail-placeholder margin-right-2">keyword</div>
+                                        <div class="cocktail-placeholder margin-right-2">keyword</div>
+                                        <div class="cocktail-placeholder margin-right-2">keyword</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid--md grid-column-gap-3 padding-x-3 padding-x-4--md padding-y-3 padding-y-2--md bg-lightgray animate-pulse animation-delay-100">
+                        <div class="grid-column-3">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">Class</div>
+                                </div>
+                                <div class="flex grid-column-8 font-mono">
+                                    <div class="cocktail-placeholder">inline</div>
+                                    <div class="cocktail-placeholder">block</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column-4">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">CSS</div>
+                                </div>
+                                <div class="flex grid-column-8 font-mono">
+                                    <div class="cocktail-placeholder">display: block</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column-2">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">Mobile First</div>
+                                </div>
+                                <div class="flex grid-column-8">
+                                    <div class="cocktail-placeholder">Yes</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column-3">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">Keywords</div>
+                                </div>
+                                <div class="grid-column-8">
+                                    <div class="flex flex-wrap items-center">
+                                        <div class="cocktail-placeholder margin-right-2">keyword</div>
+                                        <div class="cocktail-placeholder margin-right-2">keyword</div>
+                                        <div class="cocktail-placeholder margin-right-2">keyword</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid--md grid-column-gap-3 padding-x-3 padding-x-4--md padding-y-3 padding-y-2--md  animate-pulse animation-delay-300">
+                        <div class="grid-column-3">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">Class</div>
+                                </div>
+                                <div class="flex grid-column-8 font-mono">
+                                    <div class="cocktail-placeholder">inline</div>
+                                    <div class="cocktail-placeholder">block</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column-4">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">CSS</div>
+                                </div>
+                                <div class="flex grid-column-8 font-mono">
+                                    <div class="cocktail-placeholder">display: block</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column-2">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">Mobile First</div>
+                                </div>
+                                <div class="flex grid-column-8">
+                                    <div class="cocktail-placeholder">Yes</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column-3">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">Keywords</div>
+                                </div>
+                                <div class="grid-column-8">
+                                    <div class="flex flex-wrap items-center">
+                                        <div class="cocktail-placeholder margin-right-2">keyword</div>
+                                        <div class="cocktail-placeholder margin-right-2">keyword</div>
+                                        <div class="cocktail-placeholder margin-right-2">keyword</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid--md grid-column-gap-3 padding-x-3 padding-x-4--md padding-y-3 padding-y-2--md bg-lightgray animate-pulse animation-delay-200">
+                        <div class="grid-column-3">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">Class</div>
+                                </div>
+                                <div class="flex grid-column-8 font-mono">
+                                    <div class="cocktail-placeholder">inline</div>
+                                    <div class="cocktail-placeholder">block</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column-4">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">CSS</div>
+                                </div>
+                                <div class="flex grid-column-8 font-mono">
+                                    <div class="cocktail-placeholder">display: block</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column-2">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">Mobile First</div>
+                                </div>
+                                <div class="flex grid-column-8">
+                                    <div class="cocktail-placeholder">Yes</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column-3">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">Keywords</div>
+                                </div>
+                                <div class="grid-column-8">
+                                    <div class="flex flex-wrap items-center">
+                                        <div class="cocktail-placeholder margin-right-2">keyword</div>
+                                        <div class="cocktail-placeholder margin-right-2">keyword</div>
+                                        <div class="cocktail-placeholder margin-right-2">keyword</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid--md grid-column-gap-3 padding-x-3 padding-x-4--md padding-y-3 padding-y-2--md  animate-pulse animation-delay-100">
+                        <div class="grid-column-3">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">Class</div>
+                                </div>
+                                <div class="flex grid-column-8 font-mono">
+                                    <div class="cocktail-placeholder">inline</div>
+                                    <div class="cocktail-placeholder">block</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column-4">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">CSS</div>
+                                </div>
+                                <div class="flex grid-column-8 font-mono">
+                                    <div class="cocktail-placeholder">display: block</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column-2">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">Mobile First</div>
+                                </div>
+                                <div class="flex grid-column-8">
+                                    <div class="cocktail-placeholder">Yes</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column-3">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">Keywords</div>
+                                </div>
+                                <div class="grid-column-8">
+                                    <div class="flex flex-wrap items-center">
+                                        <div class="cocktail-placeholder margin-right-2">keyword</div>
+                                        <div class="cocktail-placeholder margin-right-2">keyword</div>
+                                        <div class="cocktail-placeholder margin-right-2">keyword</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid--md grid-column-gap-3 padding-x-3 padding-x-4--md padding-y-3 padding-y-2--md bg-lightgray animate-pulse animation-delay-200">
+                        <div class="grid-column-3">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">Class</div>
+                                </div>
+                                <div class="flex grid-column-8 font-mono">
+                                    <div class="cocktail-placeholder">inline</div>
+                                    <div class="cocktail-placeholder">block</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column-4">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">CSS</div>
+                                </div>
+                                <div class="flex grid-column-8 font-mono">
+                                    <div class="cocktail-placeholder">display: block</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column-2">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">Mobile First</div>
+                                </div>
+                                <div class="flex grid-column-8">
+                                    <div class="cocktail-placeholder">Yes</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column-3">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">Keywords</div>
+                                </div>
+                                <div class="grid-column-8">
+                                    <div class="flex flex-wrap items-center">
+                                        <div class="cocktail-placeholder margin-right-2">keyword</div>
+                                        <div class="cocktail-placeholder margin-right-2">keyword</div>
+                                        <div class="cocktail-placeholder margin-right-2">keyword</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid--md grid-column-gap-3 padding-x-3 padding-x-4--md padding-y-3 padding-y-2--md  animate-pulse animation-delay-200">
+                        <div class="grid-column-3">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">Class</div>
+                                </div>
+                                <div class="flex grid-column-8 font-mono">
+                                    <div class="cocktail-placeholder">inline</div>
+                                    <div class="cocktail-placeholder">block</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column-4">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">CSS</div>
+                                </div>
+                                <div class="flex grid-column-8 font-mono">
+                                    <div class="cocktail-placeholder">display: block</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column-2">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">Mobile First</div>
+                                </div>
+                                <div class="flex grid-column-8">
+                                    <div class="cocktail-placeholder">Yes</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column-3">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">Keywords</div>
+                                </div>
+                                <div class="grid-column-8">
+                                    <div class="flex flex-wrap items-center">
+                                        <div class="cocktail-placeholder margin-right-2">keyword</div>
+                                        <div class="cocktail-placeholder margin-right-2">keyword</div>
+                                        <div class="cocktail-placeholder margin-right-2">keyword</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid--md grid-column-gap-3 padding-x-3 padding-x-4--md padding-y-3 padding-y-2--md bg-lightgray animate-pulse animation-delay-200">
+                        <div class="grid-column-3">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">Class</div>
+                                </div>
+                                <div class="flex grid-column-8 font-mono">
+                                    <div class="cocktail-placeholder">inline</div>
+                                    <div class="cocktail-placeholder">block</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column-4">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">CSS</div>
+                                </div>
+                                <div class="flex grid-column-8 font-mono">
+                                    <div class="cocktail-placeholder">display: block</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column-2">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">Mobile First</div>
+                                </div>
+                                <div class="flex grid-column-8">
+                                    <div class="cocktail-placeholder">Yes</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-column-3">
+                            <div class="grid grid-column-gap-2 block--md padding-y-1 padding-y-0--md">
+                                <div class="flex hidden--md grid-column-4 color-primary-dark">
+                                    <div class="cocktail-placeholder">Keywords</div>
+                                </div>
+                                <div class="grid-column-8">
+                                    <div class="flex flex-wrap items-center">
+                                        <div class="cocktail-placeholder margin-right-2">keyword</div>
+                                        <div class="cocktail-placeholder margin-right-2">keyword</div>
+                                        <div class="cocktail-placeholder margin-right-2">keyword</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </main>
         <footer class="padding-x-4 padding-y-3 font-xs color-silver">© 2018 Released under the <a href="https://opensource.org/licenses/MIT" target="_blank">MIT License</a></footer>

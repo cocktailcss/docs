@@ -16,6 +16,7 @@ const sass = require('gulp-sass');
 const autoprefixer = require('gulp-autoprefixer');
 const gcmq = require('gulp-group-css-media-queries');
 const imagemin = require('gulp-imagemin');
+const _ = require('lodash');
 const reload = browserSync.reload;
 
 const plumberErrorHandler = () =>
@@ -33,7 +34,13 @@ gulp.task('pug', () =>
   gulp
     .src('src/pug/*.pug')
     .pipe(plumberErrorHandler())
-    .pipe(pug())
+    .pipe(
+      pug({
+        locals: {
+          _,
+        },
+      }),
+    )
     .on('error', console.log)
     .pipe(gulp.dest('docs'))
     .pipe(reload({ stream: true })),
