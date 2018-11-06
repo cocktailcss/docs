@@ -1,0 +1,25 @@
+extends layout/default
+
+include partial/mixinList
+
+block title
+	title Cocktail CSS · Examples
+	
+block content
+	body
+		.wrapper
+			+header('examples.html')
+			main
+				.padding-4
+					- for(let i = 12; i > 0; i--)
+						-
+							const primaryGridNumber = i;
+							const secondaryGridNumber = 12 - i;
+							const primaryGridNumberClass = `grid-column-${primaryGridNumber}`
+							const secondaryGridNumberClass = `grid-column-${secondaryGridNumber}`
+						.grid.grid-column-gap-2.margin-bottom-2.text-tight
+							div(class=`demo-frame flex justify-center items-center ${primaryGridNumberClass} padding-2 border-rounded-1 text-center font-mono color-primary`)= primaryGridNumberClass
+							if secondaryGridNumber
+								div(class=`demo-frame flex justify-center items-center ${secondaryGridNumberClass} padding-2 border-rounded-1 text-center font-mono color-primary`)= secondaryGridNumberClass
+			+footer
+		+script

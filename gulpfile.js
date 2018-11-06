@@ -19,6 +19,13 @@ const imagemin = require('gulp-imagemin');
 const _ = require('lodash');
 const reload = browserSync.reload;
 
+const getPugData = () => {
+  const data = require('./src/pug/local/data');
+  delete require.cache[require.resolve('./src/pug/local/data')]; // prevent module caching
+
+  return data;
+};
+
 const plumberErrorHandler = () =>
   plumber({
     errorHandler: err => {
@@ -37,6 +44,7 @@ gulp.task('pug', () =>
     .pipe(
       pug({
         locals: {
+          data: getPugData(),
           _,
         },
       }),
@@ -180,7 +188,7 @@ gulp.task('default', ['build'], () => {
     },
   });
 
-  gulp.watch(['src/pug/local/data.js', 'src/pug/local/util.js'], ['build']);
+  gulp.watch(['src/pug/local/data.js'], ['build']);
   gulp.watch('src/pug/**/*.pug', ['markup']);
   gulp.watch('src/scss/**/*.scss', ['style']);
   gulp.watch('src/js/**/*.js', ['script']);

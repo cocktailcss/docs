@@ -3,12 +3,12 @@ extends layout/default
 include partial/mixinList
 
 block title
-	title Index
+	title Cocktail CSS · Docs
 	
 block content
 	body
 		.wrapper
-			+header
+			+header('/')
 			main
 				#cocktail(v-cloak)
 					.padding-bottom-4(v-if="dataLoaded")
@@ -90,29 +90,34 @@ block content
 							div(class=`grid--md grid-column-gap-3 padding-x-3 padding-x-4--md padding-y-3 padding-y-2--md ${bgClass} animate-pulse ${animationDelayClass}`)
 								.grid-column-3
 									.grid.grid-column-gap-2.block--md.padding-y-1.padding-y-0--md
-										.flex.hidden--md.grid-column-4.color-primary-dark
+										.flex.items-start.hidden--md.grid-column-4.color-primary-dark
 											.cocktail-placeholder Class
-										.flex.grid-column-8.font-mono
-											.cocktail-placeholder inline
-											.cocktail-placeholder block
+										.flex.flex-wrap.items-start.grid-column-8.font-mono
+											-
+												const randomClassesNumber = _.random(1, 3)
+											- for(let j = 0; j < randomClassesNumber; j++)
+												.cocktail-placeholder.margin-right-2= _.sample(data.classes)
 								.grid-column-4
 									.grid.grid-column-gap-2.block--md.padding-y-1.padding-y-0--md
-										.flex.hidden--md.grid-column-4.color-primary-dark
+										.flex.items-start.hidden--md.grid-column-4.color-primary-dark
 											.cocktail-placeholder CSS
-										.flex.grid-column-8.font-mono
-											.cocktail-placeholder display: block
+										.flex.flex-wrap.items-start.grid-column-8.font-mono
+											-
+												const randomStylesNumber = _.random(2, 3)
+											- for(let j = 0; j < randomStylesNumber; j++)
+												.cocktail-placeholder.margin-right-2= _.sample(data.styles)
 								.grid-column-2
 									.grid.grid-column-gap-2.block--md.padding-y-1.padding-y-0--md
-										.flex.hidden--md.grid-column-4.color-primary-dark
+										.flex.items-start.hidden--md.grid-column-4.color-primary-dark
 											.cocktail-placeholder Mobile First
 										.flex.grid-column-8
 											.cocktail-placeholder Yes
 								.grid-column-3
 									.grid.grid-column-gap-2.block--md.padding-y-1.padding-y-0--md
-										.flex.hidden--md.grid-column-4.color-primary-dark
+										.flex.items-start.hidden--md.grid-column-4.color-primary-dark
 											.cocktail-placeholder Keywords
 										.grid-column-8
-											.flex.flex-wrap.items-center
+											.flex.flex-wrap.items-start.flex-wrap.items-center
 												- for(let j = 0; j < 3; j++)
 													.cocktail-placeholder.margin-right-2 keyword
 			+footer

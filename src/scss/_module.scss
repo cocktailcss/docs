@@ -23,6 +23,7 @@
   background-color: #f9e5e0;
   user-select: none;
   color: rgba(0, 0, 0, 0);
+  border-radius: 0.125rem;
 }
 
 .cocktail-trigger {
@@ -67,4 +68,8 @@
       }
     }
   }
+}
+
+.demo-frame {
+  border: 0.125rem solid $color_primary;
 }

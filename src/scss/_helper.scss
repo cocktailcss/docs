@@ -30,6 +30,10 @@
   color: silver;
 }
 
+.color-primary {
+  color: $color_primary;
+}
+
 .dim {
   transition: background-color 0.1s ease;
   &:hover,
