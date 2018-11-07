@@ -10,16 +10,57 @@ block content
 		.wrapper
 			+header('examples.html')
 			main
-				.padding-4
-					- for(let i = 12; i > 0; i--)
-						-
-							const primaryGridNumber = i;
-							const secondaryGridNumber = 12 - i;
-							const primaryGridNumberClass = `grid-column-${primaryGridNumber}`
-							const secondaryGridNumberClass = `grid-column-${secondaryGridNumber}`
-						.grid.grid-column-gap-2.margin-bottom-2.text-tight
-							div(class=`demo-frame flex justify-center items-center ${primaryGridNumberClass} padding-2 border-rounded-1 text-center font-mono color-primary`)= primaryGridNumberClass
-							if secondaryGridNumber
-								div(class=`demo-frame flex justify-center items-center ${secondaryGridNumberClass} padding-2 border-rounded-1 text-center font-mono color-primary`)= secondaryGridNumberClass
+				.padding-4.font-mono.color-primary.text-center.text-tight
+					.overflow-auto
+						- for(let i = 12; i > 0; i--)
+							-
+								const primaryGridNumber = i;
+								const secondaryGridNumber = 12 - i;
+								const primaryGridNumberClass = `grid-column-${primaryGridNumber}`
+								const secondaryGridNumberClass = `grid-column-${secondaryGridNumber}`
+							.grid.grid-column-gap-2.margin-bottom-2
+								div(class=`demo-frame flex justify-center items-center ${primaryGridNumberClass} padding-2 border-rounded-1`)
+									span.hidden--lg= primaryGridNumber
+									span.hidden.inline--lg= primaryGridNumberClass
+								if secondaryGridNumber
+									div(class=`demo-frame flex justify-center items-center ${secondaryGridNumberClass} padding-2 border-rounded-1`)
+										span.hidden--lg= secondaryGridNumber
+										span.hidden.inline--lg= secondaryGridNumberClass
+					.overflow-auto
+						- for(let i = 10; i >= 2; i -= 2)
+							-
+								const gridNumber = i;
+								const gridColumnStartNumber = ((12 - i) / 2) + 1;
+								const gridNumberClass = `grid-column-${gridNumber}`
+								const gridColumnStartNumberClass = `grid-column-start-${gridColumnStartNumber}`
+							.grid
+								div(class=`demo-frame ${gridNumberClass} ${gridColumnStartNumberClass} margin-bottom-2 padding-y-2`)
+									span.hidden--lg #{gridNumber} / #{gridColumnStartNumber}
+									span.hidden.inline--lg #{gridNumberClass} #{gridColumnStartNumberClass}
+					.overflow-auto
+						.flex.items-center.margin-bottom-2
+							- for(let i = 6; i > 0; i--)
+								- const paddingClass = `padding-${i}`
+									div(class=`demo-frame margin-right-2 ${paddingClass}`)
+										.demo-frame.spacing= paddingClass
+					.overflow-auto
+						.flex.items-center.margin-bottom-2
+							- for(let i = 6; i > 0; i--)
+								- const marginClass = `margin-${i}`
+									.demo-frame.margin-right-2
+										div(class=marginClass)
+											.demo-frame.spacing= marginClass
+				.padding-x-4.padding-bottom-4.font-mono.text-nowrap
+					.overflow-auto
+						.flex.items-center
+							.margin-right-1.font-5xl font-5xl
+							.margin-right-1.font-4xl font-4xl
+							.margin-right-1.font-3xl font-3xl
+							.margin-right-1.font-2xl font-2xl
+							.margin-right-1.font-xl font-xl
+							.margin-right-1.font-lg font-lg
+							.margin-right-1.font-nl font-nl
+							.margin-right-1.font-sm font-sm
+							.margin-right-1.font-xs font-xs
 			+footer
 		+script

@@ -56,20 +56,16 @@
 }
 
 .logo {
+  padding-bottom: 0.6rem;
   &__icon {
-    width: 1.5rem;
-    fill: white;
-  }
-  &:hover,
-  &:focus {
-    .logo__icon {
-      @include respondTo(netbook, min) {
-        animation: bounce 0.6s ease;
-      }
-    }
+    height: 2rem;
   }
 }
 
 .demo-frame {
   border: 0.125rem solid $color_primary;
+}
+
+.spacing {
+  min-width: 7rem;
 }
