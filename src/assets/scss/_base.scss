@@ -1,0 +1,130 @@
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+  @include respondTo(desktop, min) {
+    font-size: 1vw;
+  }
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  font-size: 1rem;
+  font-family: $font_default;
+  line-height: 1.7;
+  color: $color_default;
+  background-color: white;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  @extend .link;
+}
+
+button,
+a {
+  outline: none;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+  background: none;
+  color: $color_default;
+  line-height: 1.7;
+}
+
+img {
+  max-width: 100%;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+figure {
+  margin: 0;
+}
+
+textarea {
+  resize: vertical;
+}
+
+input {
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  color: $color_primary_light;
+  line-height: 1.7;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1.2;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="password"],
+input[type="search"],
+textarea {
+  &::-webkit-input-placeholder {
+    /* Chrome/Opera/Safari */
+    color: lighten(gray, 20%);
+  }
+  &::-moz-placeholder {
+    /* Firefox 19+ */
+    color: lighten(gray, 20%);
+  }
+  &:-ms-input-placeholder {
+    /* IE 10+ */
+    color: lighten(gray, 20%);
+  }
+  &:-moz-placeholder {
+    /* Firefox 18- */
+    color: lighten(gray, 20%);
+  }
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-button {
+  width: 0;
+  height: 0;
+}
+::-webkit-scrollbar-thumb {
+  background: #7fddcc;
+  border: 0 none transparent;
+  border-radius: 100px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #60c0ae;
+}
+::-webkit-scrollbar-thumb:active {
+  background: #60c0ae;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+  border: 0 none transparent;
+  border-radius: 100px;
+}
+::-webkit-scrollbar-track:hover {
+  background: transparent;
+}
+::-webkit-scrollbar-track:active {
+  background: transparent;
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
+}

@@ -1,0 +1,10 @@
+%link {
+  text-decoration: none;
+  transition: color 0.1s;
+  &:hover,
+  &:focus {
+    &:not(.btn):not(.link-main):not(.sublink) {
+      color: $color_highlight;
+    }
+  }
+}

@@ -1,0 +1,107 @@
+.btn {
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+  border-radius: 100px;
+  display: flex;
+  cursor: pointer;
+  outline: inherit;
+  user-select: none;
+  align-items: center;
+  font-family: $font_default;
+  font-weight: bold;
+  background-color: #f6f6f6;
+  color: $color_primary_light;
+  &:not(.btn--tight) {
+    padding: 0.2rem 1.4rem;
+  }
+  &:not(.btn--plain) {
+    box-shadow: 0.4rem 0.4rem 0.6rem rgba(204, 204, 204, 0.5), -0.4rem -0.3rem 0.7rem 0.1rem white;
+  }
+  &[disabled] {
+    cursor: not-allowed;
+    color: rgba(0, 0, 0, 0.15);
+    &[data-progress] {
+      cursor: progress;
+      &:before {
+        content: "";
+        width: 1rem;
+        height: 1rem;
+        display: inline-block;
+        background: url("/img/spinner.svg") no-repeat;
+        vertical-align: middle;
+        margin-right: 0.4rem;
+        animation: rotation 1s linear infinite;
+        opacity: 0.15;
+      }
+    }
+  }
+  &:hover,
+  &:focus {
+    &:not(:active):not([disabled]) {
+      border-color: $color_primary_light;
+    }
+  }
+  &:active {
+    &:not(.btn--plain) {
+      box-shadow: inset 0.4rem 0.4rem 0.6rem rgba(150, 150, 150, 0.2),
+        -0.3rem -0.3rem 0.7rem 0.1rem rgba(255, 255, 255, 1), 0.4rem 0.4rem 0.6rem white;
+    }
+  }
+  @include mod(primary) {
+    &:not([disabled]) {
+      background-color: #7fddcc;
+      color: white;
+      &:hover,
+      &:focus {
+        &:not(:active):not([disabled]) {
+          border-color: #60c0ae;
+        }
+      }
+      &:active {
+        box-shadow: inset 0.4rem 0.4rem 0.6rem #39ccb0;
+      }
+    }
+  }
+  @include mod(alt) {
+    &:not([disabled]) {
+      background-color: #abc6ed;
+      color: white;
+      &:hover,
+      &:focus {
+        &:not(:active):not([disabled]) {
+          border-color: #8aacde;
+        }
+      }
+      &:active {
+        box-shadow: inset 0.4rem 0.4rem 0.6rem #84a7d8;
+      }
+    }
+  }
+  @include mod(plain) {
+    &:not([disabled]) {
+      &:active {
+        box-shadow: inset 0.4rem 0.4rem 0.6rem rgba(150, 150, 150, 0.2);
+      }
+    }
+  }
+  @include mod(tight) {
+    padding: 0.1rem 0.6rem;
+  }
+  @include mod(circle) {
+    width: 1.9rem;
+    min-width: 1.9rem;
+    height: 1.9rem;
+    padding: 0;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    svg {
+      width: 0.9rem;
+      min-width: 0.9rem;
+      height: 0.9rem;
+      fill: $color_primary_light;
+    }
+  }
+}
